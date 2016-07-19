@@ -7,8 +7,10 @@ cloud servers running on Heroku, Elastic Beanstalk and other PaaS platforms.
 
 To deploy this HTML app from within Cloud CMS, simply create an Application for your Project and set the Application source to the Git URL for the project:
 
-    https://github.com/gitana/sdk.git
+    https://github.com/sclement/cloudcms-sample-website.git
   
+If you are working within a path (as the original SDK from https://github.com/gitana/sdk might use the sample-website directory)
+
 And then set the path to:
 
     /sample-website
