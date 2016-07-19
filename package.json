@@ -1,0 +1,24 @@
+{
+	"name": "DemoApp",
+	"version": "1.0.0",
+	"description": "Demo Application",
+	"keywords": [
+		"Cloud CMS"
+	],
+	"author": "Harry Moore",
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"cloudcms-server": "*",
+		"gitana": "*",
+		"express": "*",
+		"node-country": "0.1.2",
+		"express-useragent": "0.2.4",
+		"async": "*",
+		"request": "2.55.0"
+	},
+	"devDependencies": {
+	},
+	"private": true
+}

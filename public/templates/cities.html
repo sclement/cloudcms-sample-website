@@ -1,0 +1,73 @@
+{@layout path="cities" theme="blue" /}
+
+{<content}
+
+<section id="content">
+    <header class="page-header mb30">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h1>
+                        <a href="/locations/index.html">Clinic</a> &rarr; <a href="/locations/cities.html">Locations</a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="pt30 pb30">
+        <div class="container clearfix">
+            <div class="row">
+
+                <!-- cities -->
+                <div class="portfolio-items isotopeWrapper clearfix imgHover neko-hover-1" id="3">
+
+                    {@query type="guide:city" sort="title"}
+                        {#rows}
+                        <article class="col-sm-4 isotopeItem {type}">
+                            <div class="pinBox">
+                                <figure>
+                                    <a href="city.html?id={_doc}" title="link">
+                                        <img style="height:250px" alt="{title}" src="/preview/node/{_doc}/thumbnail?width=326&mimetype=image/jpeg" class="img-responsive">
+                                    </a>
+                                    <figcaption>
+                                        <ul class="pinInfo">
+                                            <li><a href=""><i class="icon-eye"></i>150</a></li>
+                                            <li><a href=""><i class="icon-comment-1"></i>4</a></li>
+                                            <li><a href=""><i class="icon-heart"></i>32</a></li>
+                                        </ul>
+                                        <div class="iconLinks">
+                                            <a href="city.html?id={_doc}" title="link"><i class="icon-picture "></i></a>
+                                            <a href="/theme/images/portfolio/zoom6.jpg" class="image-link" title="Zoom" ><i class="icon-search"></i></a>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                                <section class="boxContent">
+                                    <h3>
+                                        <a href="city.html?id={_doc}" title="link">
+                                            {title}
+                                        </a>
+                                    </h3>
+                                    <p>
+                                        <b>{headline}</b>
+                                        <br />
+                                        <br/>
+                                        {summary}
+                                    </p>
+                                    <br/>
+                                    <p align="right">
+                                        <a class="btn btn-primary" href="city.html?id={_doc}" class="moreLink">Learn More</a>
+                                    </p>
+                                </section>
+                            </div>
+                        </article>
+                        {/rows}
+                    {/query}
+
+                </div>
+            </div>
+        </div>
+    </section>
+</section>
+
+{/content}
+

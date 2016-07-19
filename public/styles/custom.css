@@ -1,0 +1,60 @@
+.rating-holder img
+{
+    width: 24px;
+}
+
+.review-holder
+{
+    margin-bottom: 20px;
+}
+
+.review-holder .rating-holder
+{
+    margin-bottom: 10px;
+}
+
+.review-holder h4.media-heading
+{
+    font-weight: 400;
+}
+
+.review-holder .review .media-left img
+{
+    border-radius: 4px;
+}
+
+#front-parallax
+{
+    background-image: url('../images/front/parallax.jpg');
+}
+
+#videoBg
+{
+    height: auto;
+}
+
+.minimalBox img
+{
+    border-radius: 8px;
+}
+
+.site-title
+{
+    padding-top: 20px;
+}
+
+#globalWrapper.catalog .page-header a
+{
+    color: white;
+}
+
+#globalWrapper.guide .page-header a
+{
+    color: white;
+}
+
+#globalWrapper.guide .paralaxText a
+{
+    font-weight: 400;
+    color: white;
+}

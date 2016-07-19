@@ -1,0 +1,82 @@
+{@layout path="city" theme="blue" /}
+
+{<content}
+
+{@queryOne type="guide:city" field="_doc" fieldValue="{request.qs.id}" as="city"}
+<section id="page">
+    <header class="page-header mb30">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>
+                        <a href="/locations/index.html">Clinic Locations</a> &rarr; <a href="/locations/cities.html">Cities</a>
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="content" class="mt30 pb30">
+        <div class="container">
+            <div class="row">
+
+                <!-- page content-->
+                <section class="col-md-12">
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <h1><b><a href="/locations/city.html?id={city._doc}">{city.title}</a></b></h1>
+                            <h3>{city.state}</h3>
+                            <br/>
+                            <h3>{city.headline|s}</h3>
+                            <br/>
+                            <h4>By {city.author}</h4>
+                            <p>
+                                {city.body|s}
+                            </p>
+
+                        </div>
+                        <div class="col-md-5 mb30">
+                            <div class="imgBorder">
+                                <a href="/locations/city.html?id={city._doc}">
+                                    <img src="/preview/node/{city._doc}/thumbnail_large?size=480&mimetype=image/jpeg&force=true" alt="{title}" class="img-responsive" />
+                                </a>
+                            </div>
+                            <br/>
+                            <p>
+                                {city.summary|s}
+                            </p>
+                            <br/>
+                            <div class="boxFocus color1">
+                                <ul class="iconList list-unstyled">
+                                    {#city.highlights}
+                                    <li>{.|s}</li>
+                                    {/city.highlights}
+                                </ul>
+                            </div>
+                            <br/>
+                            <br/>
+                            {#city.testimonials}
+                            <div>
+                                <blockquote>
+                                    {text}
+                                </blockquote>
+                                <p align="right">
+                                    - {author}
+                                </p>
+                            </div>
+                            {/city.testimonials}
+
+                        </div>
+                    </div>
+                </section>
+                <!--end page content right-->
+            </div>
+        </div>
+    </section>
+    <!--end page content-->
+
+</section>
+{/queryOne}
+
+{/content}
+

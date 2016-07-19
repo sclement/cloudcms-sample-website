@@ -1,0 +1,180 @@
+{@layout path="product" theme="red"  /}
+
+{<content}
+
+{@queryOne type="catalog:product" field="_doc" fieldValue="{request.qs.id}" as="product"}
+<section id="page">
+    <header class="page-header mb30">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>
+                        <a href="/catalog/index.html">Product Catalog</a> &rarr; {product.title}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="content" class="mt30 pb30">
+        <div class="container">
+            <div class="row">
+
+                <!-- page content-->
+                <section class="col-md-12">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1><b>{product.title}</b></h1>
+                            <div class="rating-holder">
+                                {@select key="{product._statistics.ratingAverageValue}"}
+                                {@lte value="1"}
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star-empty.png">
+                                <img src="/images/rating/star-empty.png">
+                                <img src="/images/rating/star-empty.png">
+                                <img src="/images/rating/star-empty.png">
+                                {/lte}
+                                {@lte value="2"}
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star-empty.png">
+                                <img src="/images/rating/star-empty.png">
+                                <img src="/images/rating/star-empty.png">
+                                {/lte}
+                                {@lte value="3"}
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star-empty.png">
+                                <img src="/images/rating/star-empty.png">
+                                {/lte}
+                                {@lte value="4"}
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star-empty.png">
+                                {/lte}
+                                {@lte value="5"}
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                <img src="/images/rating/star.png">
+                                {/lte}
+                                {/select}
+                                <p>
+                                    ({@math key="{product._statistics.ratingAverageValue}" method="round"/} stars based on {product._statistics.ratingTotalCount} reviews)
+                                </p>
+                            </div>
+                            <br/>
+                            <h3>{product.headline}</h3>
+                            <p>
+                                {product.body|s}
+                            </p>
+
+                            <hr/>
+
+                            <h3><b>Reviews</b></h3>
+                            {@associations node="{product._doc}" type="catalog:product-has-review"}
+                            {#rows}
+                            <div class="review-holder">
+                                <div class="rating-holder">
+                                    {@select key="{other.rating}"}
+                                    {@lte value="1"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="2"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="3"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="4"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="5"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    {/lte}
+                                    {/select}
+                                </div>
+                                {@queryOne type="catalog:person" field="name" fieldValue="{other.author}" as="person"}
+                                <div class="review">
+                                    <div class="media">
+                                        <div class="pull-left media-left">
+                                            <div style="text-align:center">
+                                                <a href="/catalog/reviewer.html?id={person._doc}">
+                                                    <img class="media-object" alt="{person.title}" src="/preview/node/{person._doc}/thumbnail_large?size=150&mimetype=image/jpeg&force=true">
+                                                </a>
+                                                <p>
+                                                    <a href="/catalog/reviewer.html?id={person._doc}">
+                                                        {person.title}
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">{other.title}</h4>
+                                            <p>
+                                                By <a href="/catalog/reviewer.html?id={person._doc}">{person.title}</a>
+                                            </p>
+                                            <p>
+                                                {other.body|s}
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/queryOne}
+                            </div>
+                            {/rows}
+                            {/associations}
+                        </div>
+                        <div class="col-md-4 mb30">
+                            <div class="imgBorder">
+                                <a href="/catalog/product.html?id={product._doc}">
+                                    <img src="/preview/node/{product._doc}/thumbnail_large?size=480&mimetype=image/jpeg&force=true" alt="{title}" class="img-responsive" />
+                                </a>
+                            </div>
+                            <h3>{product.title}</h3>
+                            <h5>{product.sku}</h5>
+                            <p>
+                                {product.summary}
+                            </p>
+                            <p>
+                                ${product.price}
+                            </p>
+                            <br/>
+                            <div class="pull-right">
+                                <a class="btn btn-default">Buy Now</a>
+                            </div>
+                            <div style="clear:both"></div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+{/queryOne}
+
+{/content}

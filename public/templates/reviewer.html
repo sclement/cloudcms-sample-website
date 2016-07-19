@@ -1,0 +1,154 @@
+{@layout path="product" theme="red"  /}
+
+{<content}
+
+{@queryOne type="catalog:person" field="_doc" fieldValue="{request.qs.id}" as="person"}
+<section id="page">
+    <header class="page-header mb30">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <h1>
+                        <a href="/catalog/index.html">Product Catalog</a> &rarr; {person.title}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section id="content" class="mt30 pb30">
+        <div class="container">
+            <div class="row">
+
+                <!-- page content-->
+                <section class="col-md-12">
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <h1>
+                                <b>{person.title}</b>
+                            </h1>
+
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <p class="form-control-static" id="firstName">
+                                    {person.firstName}
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="firstName">Last Name</label>
+                                <p class="form-control-static" id="lastName">
+                                    {person.lastName}
+                                </p>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email">Email</label>
+                                <p class="form-control-static" id="email">
+                                    {person.email}
+                                </p>
+                            </div>
+
+                            <p>
+                                {person.about|s}
+                            </p>
+
+                            <hr/>
+
+                            <h3><b>Reviews</b></h3>
+                            {@query type="catalog:product-review" field="author" fieldValue="{person.name}" as="reviews"}
+                            {#reviews.rows}
+                            <div class="review-holder">
+                                <div class="rating-holder">
+                                    {@select key="{rating}"}
+                                    {@lte value="1"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="2"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="3"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="4"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star-empty.png">
+                                    {/lte}
+                                    {@lte value="5"}
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    <img src="/images/rating/star.png">
+                                    {/lte}
+                                    {/select}
+                                </div>
+                                {@associations node="{_doc}" type="catalog:product-has-review" as="hasReviews"}
+                                {#hasReviews.rows}
+                                <div class="review">
+                                    <div class="media">
+                                        <div class="pull-left media-left">
+                                            <a href="/catalog/product.html?id={other._doc}">
+                                                <img class="media-object" alt="{other.title}" src="/preview/node/{other._doc}/thumbnail_large?size=150&mimetype=image/jpeg&force=true">
+                                            </a>
+                                        </div>
+                                        <div class="media-body">
+                                            <h4 class="media-heading">
+                                                <a href="/catalog/product.html?id={other._doc}">
+                                                    {other.title}
+                                                </a>
+                                            </h4>
+                                            <p>
+                                                {other.summary}
+                                            </p>
+                                            <br/>
+                                            <h4>
+                                                <i>{person.title} writes:</i>
+                                            </h4>
+                                            <p>
+                                                <i>{body|s}</i>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                                {/hasReviews.rows}
+                                {/associations}
+                            </div>
+                            {/reviews.rows}
+                            {/query}
+                        </div>
+                        <div class="col-md-4 mb30">
+                            <div class="imgBorder">
+                                <a href="/catalog/reviewer.html?id={person._doc}">
+                                    <img src="/preview/node/{person._doc}/thumbnail_large?size=480&mimetype=image/jpeg&force=true" alt="{title}" class="img-responsive" />
+                                </a>
+                            </div>
+                            <br/>
+                            <div style="text-align:center">
+                                <a class="btn btn-default">Send a Message to {person.title}</a>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
+</section>
+{/queryOne}
+
+{/content}
