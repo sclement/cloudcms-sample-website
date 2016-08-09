@@ -2,7 +2,7 @@ var server = require("cloudcms-server/server");
 
 var customDustHelpers = require("./lib/dust-helpers.js");
 var customRoutes = require("./routes/routes.js");
-var customTags = require("./tags/index.js");
+//var customTags = require("./tags/index.js");
 
 var util = require("./lib/util.js");
 
@@ -10,7 +10,7 @@ var util = require("./lib/util.js");
  * Custom Dust Helpers
  */
 server.dust(customDustHelpers);
-server.dust(customTags);
+//server.dust(customTags);
 
 /**
  * Custom Routes
