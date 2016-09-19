@@ -1,4 +1,6 @@
 var server = require("cloudcms-server/server");
+var path = require("path");
+var fs = require("fs");
 
 var customDustHelpers = require("./lib/dust-helpers.js");
 var customRoutes = require("./routes/routes.js");
@@ -30,7 +32,7 @@ server.report(function(callback) {
 
     // provide some debug info
     console.log("");
-    console.log("Moen Training App Started Up");
+    console.log("Cloud CMS Sample App Started Up");
     console.log("");
     console.log("Node Version: " + process.version);
     console.log("Server Version: " + process.env.CLOUDCMS_APPSERVER_PACKAGE_VERSION);
@@ -71,6 +73,13 @@ server.dust(function(app, dust, callback) {
     callback();
 });
 */
+
+var configFilePath = path.resolve(path.join(".", "sqs-config.json"));
+var sqsConfig = null;
+if (fs.existsSync(configFilePath)) {
+	sqsConfig = JSON.parse(fs.readFileSync(configFilePath));
+}
+
 /**
  * Start the Server
  */
@@ -99,5 +108,10 @@ server.start({
                 "seconds": 300
             }
         }]
+    },
+    "notifications": {
+        "enabled": true,
+        "type": "sqs",
+        "configuration": sqsConfig
     }
 });
