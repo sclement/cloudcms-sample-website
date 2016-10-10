@@ -108,10 +108,5 @@ server.start({
                 "seconds": 300
             }
         }]
-    },
-    "notifications": {
-        "enabled": true,
-        "type": "sqs",
-        "configuration": sqsConfig
     }
 });

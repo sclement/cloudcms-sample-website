@@ -2,7 +2,7 @@
 
 {<content}
 
-{@queryOne type="catalog:product" field="_doc" fieldValue="{request.qs.id}" as="product"}
+{@queryOne type="catalog:product" field="slug" fieldValue="{request.tokens.productSlug}" as="product"}
 <section id="page">
     <header class="page-header mb30">
         <div class="container">
